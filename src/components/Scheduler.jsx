@@ -25,12 +25,15 @@ class Scheduler extends React.Component<Props, State> {
         };
     }
 
-    selectedDay = (e) => {
-        this.setState({
-            selectedDay: e.target.value,
-            selectedTopic: null,
-            selectedType: null,
-        });
+    selectedDay = (e: Event) => {
+        let target = e.target;
+        if (target instanceof HTMLInputElement) {
+            this.setState({
+                selectedDay: e.target.value,
+                selectedTopic: null,
+                selectedType: null,
+            });
+        }
     };
 
     selectedTopic = (e) => {
