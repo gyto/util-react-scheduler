@@ -1,4 +1,4 @@
-import { TOPIC_TAGS, DAYS } from "./tags";
+import { TOPIC_TAGS, DAYS, TYPE_TAGS } from './tags';
 
 export const SCHEDULE = [
     {
@@ -11,16 +11,16 @@ export const SCHEDULE = [
                         from: '6:30',
                         to: '7:00',
                         text: 'Registration and Exhibits',
-                        typeTags: []
+                        typeTags: [TYPE_TAGS.cmeSymposium],
                     },
                     {
                         from: '6:30',
                         to: '7:00',
                         text: 'Registration and Exhibits',
-                        typeTags: []
-                    }
+                        typeTags: [],
+                    },
                 ],
-                topicTags: [TOPIC_TAGS.cardiovascularDisease]
+                topicTags: [TOPIC_TAGS.cardiovascularDisease, TYPE_TAGS.cmeSymposium],
             },
             {
                 topic: 'This is Section 2',
@@ -28,20 +28,20 @@ export const SCHEDULE = [
                     {
                         from: '6:30',
                         to: '7:00',
-                        text: 'Registration and Exhibits'
-                    }
+                        text: 'Registration and Exhibits',
+                    },
                 ],
-                topicTags: []
-            }
+                topicTags: [],
+            },
         ],
-        dayTags: [DAYS[0], TOPIC_TAGS.cardiovascularDisease]
+        dayTags: [DAYS[0], TOPIC_TAGS.cardiovascularDisease, TYPE_TAGS.cmeSymposium],
     },
     {
         day: 'Saturday, May 4, 2019',
-        dayTags: [DAYS[1]]
+        dayTags: [DAYS[1]],
     },
     {
         day: 'Sunday, May 5, 2019',
-        dayTags: [DAYS[2]]
-    }
+        dayTags: [DAYS[2]],
+    },
 ];

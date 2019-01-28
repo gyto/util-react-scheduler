@@ -1,18 +1,19 @@
 // @flow
 
 import * as React from 'react';
-import { SCHEDULE } from './schedule'
-import { TOPIC_ARRAY_TAGS, TOPIC_TAGS, DAYS } from "./tags";
+import { SCHEDULE } from './schedule';
+import { TYPE_ARRAY_TAGS, TOPIC_ARRAY_TAGS, DAYS } from './tags';
 import { Accordion, AccordionItem } from 'react-sanfona';
-import kebabCase from 'lodash.kebabcase';
 
 type Props = {}
 
 type State = {
-    selectedDay: Array,
-    selectedTopic: Object
+    selectedDay: ?Array<string>,
+    selectedTopic: ?Object,
+    selectedType: ?Object
 
 }
+
 class Scheduler extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
@@ -20,46 +21,44 @@ class Scheduler extends React.Component<Props, State> {
         this.state = {
             selectedDay: DAYS[0],
             selectedTopic: null,
-        }
+            selectedType: null,
+        };
     }
 
     selectedDay = (e) => {
         this.setState({
             selectedDay: e.target.value,
             selectedTopic: null,
+            selectedType: null,
         });
-        console.log(this.state.selectedDay);
     };
 
     selectedTopic = (e) => {
         this.setState({
+            selectedDay: null,
             selectedTopic: e.target.value,
-            selectedDay: null
+            selectedType: null,
         });
-        console.log(e.target.value);
+    };
+
+    selectedType = (e) => {
+        this.setState({
+            selectedDay: null,
+            selectedTopic: null,
+            selectedType: e.target.value,
+        });
     };
 
     render() {
-        console.log(TOPIC_TAGS);
-        // const topics = SCHEDULE.map(
-        //     schedule => schedule.sections && schedule.sections.filter((section) => {
-        //         return section.topicTags.indexOf(TITLE_TAGS.CardiovascularDisease)
-        //     }));
-
-        // const days = SCHEDULE.map((schedule) => {
-        //     return schedule.sections;
-        // }).filter(day => day.dayTags.indexOf(TITLE_TAGS.day1) > -1);
-
         // filter by date
         const days = SCHEDULE.filter(day => day.dayTags.indexOf(this.state.selectedDay) > -1);
         const daysToDisplay = [...DAYS];
 
         // filter by topics
-        // const topics = SCHEDULE.filter(day => day.dayTags && day.dayTags.indexOf(this.state.selectedTopic) > -1).map(day => day.sections.filter(topic => topic.topicTags.indexOf(this.state.selectedTopic) > -1));
         const topics = SCHEDULE.filter(day => day.dayTags.indexOf(this.state.selectedTopic) > -1);
-        // const topics = SCHEDULE.map(day => day.sections && day.sections.filter(topic => topic.topicTags.indexOf(this.state.selectedTopic) > -1));
 
-        console.log('topcis', topics);
+        // filter by type
+        const types = SCHEDULE.filter(day => day.dayTags.indexOf(this.state.selectedType) > -1);
 
         return (
             <div>
@@ -70,7 +69,7 @@ class Scheduler extends React.Component<Props, State> {
                             expanded={true}
                         >
                             {daysToDisplay.map((day, index) => {
-                                return <label key={index}>
+                                return <label key={'day-' + index}>
                                     <input
                                         type="radio"
                                         value={day}
@@ -78,33 +77,43 @@ class Scheduler extends React.Component<Props, State> {
                                         name='date'
                                         defaultChecked={day === DAYS[0]}
                                     /> {day}
-                                </label>
+                                </label>;
                             })}
                         </AccordionItem>
                         <AccordionItem
                             title={'Filter by topics +'}
                         >
                             <div>
-                                {TOPIC_ARRAY_TAGS.map((tag, index) => {
-                                    return <label key={index}>
+                                {TOPIC_ARRAY_TAGS.map((topic, index) => {
+                                    return <label key={'topic-' + index}>
                                         <input
                                             type="radio"
-                                            value={tag}
+                                            value={topic}
                                             name='topic'
                                             onClick={event => this.selectedTopic(event)}
-                                        /> {tag}
-                                    </label>
+                                        /> {topic}
+                                    </label>;
                                 })}
                             </div>
                         </AccordionItem>
                         <AccordionItem
                             title={'Filter by type +'}
                         >
-                            <div>TODO</div>
+                            <div>
+                                {TYPE_ARRAY_TAGS.map((type, index) => {
+                                    return <label key={'type-' + index}>
+                                        <input
+                                            type="radio"
+                                            value={type}
+                                            name='type'
+                                            onClick={event => this.selectedType(event)}
+                                        /> {type}
+                                    </label>;
+                                })}
+                            </div>
                         </AccordionItem>
                     </Accordion>
                 </div>
-                {console.log(SCHEDULE)}
                 {days.map((schedule, index) => {
                     return <React.Fragment key={index}>
                         <h2>{schedule.day}</h2>
@@ -115,11 +124,11 @@ class Scheduler extends React.Component<Props, State> {
                                     return <React.Fragment key={'block' + blockIndex}>
                                         <p>{time.from} - {time.to}</p>
                                         <p>{time.text}</p>
-                                    </React.Fragment>
+                                    </React.Fragment>;
                                 })}
-                            </React.Fragment>
+                            </React.Fragment>;
                         })}
-                    </React.Fragment>
+                    </React.Fragment>;
                 })}
                 {topics.map((schedule, index) => {
                     return <React.Fragment key={index}>
@@ -131,7 +140,23 @@ class Scheduler extends React.Component<Props, State> {
                                     return <React.Fragment key={'block' + blockIndex}>
                                         <p>{time.from} - {time.to}</p>
                                         <p>{time.text}</p>
-                                    </React.Fragment>
+                                    </React.Fragment>;
+                                })}
+                            </React.Fragment>;
+                        })}
+                    </React.Fragment>;
+                })}
+                {types.map((schedule, index) => {
+                    return <React.Fragment key={index}>
+                        <h2>{schedule.day}</h2>
+                        {schedule.sections.filter(section => section.topicTags.indexOf(this.state.selectedType) > -1).map((section, sectionIndex) => {
+                            return <React.Fragment key={'section-' + sectionIndex}>
+                                <h3>{section.topic}</h3>
+                                {section.topics && section.topics.filter(time => time.typeTags.indexOf(this.state.selectedType) > -1).map((time, blockIndex) => {
+                                    return <React.Fragment key={'block' + blockIndex}>
+                                        <p>{time.from} - {time.to}</p>
+                                        <p>{time.text}</p>
+                                    </React.Fragment>;
                                 })}
                             </React.Fragment>;
                         })}
@@ -143,5 +168,4 @@ class Scheduler extends React.Component<Props, State> {
 }
 
 export default Scheduler;
-
 

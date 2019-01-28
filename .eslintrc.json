@@ -1,0 +1,71 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "jest/globals": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:jest/recommended",
+        "plugin:react/recommended",
+        "plugin:flowtype/recommended"
+    ],
+    "globals": {
+        "jsdom": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "expirementalClassProperties": true,
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "flowtype",
+        "flowtype-errors",
+        "jest",
+        "react"
+    ],
+    "rules": {
+        "indent": [
+            "error",
+            4,
+            {"SwitchCase": 1}
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "curly": [
+            "error",
+            "multi-line"
+        ],
+        "comma-dangle": ["error", "always-multiline"],
+        "eol-last": ["error", "always"],
+        "no-lonely-if": "error",
+        "no-trailing-spaces": "error",
+        "padded-blocks": ["error", "never"],
+        "keyword-spacing": ["error", { "before": true, "after":  true}],
+        "lines-between-class-members": ["error", "always"],
+        "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
+        "flowtype-errors/show-errors": 2,
+        "flowtype-errors/show-warnings": 1
+    },
+    "settings": {
+        "react": {
+            "version": "16.6.0",
+            "flowVersion": "0.83"
+        }
+    }
+}
