@@ -6,22 +6,36 @@ import { TOPIC_ARRAY_TAGS, TOPIC_TAGS, DAYS } from "./tags";
 import { Accordion, AccordionItem } from 'react-sanfona';
 import kebabCase from 'lodash.kebabcase';
 
-class Scheduler extends React.Component {
-    constructor(props) {
+type Props = {}
+
+type State = {
+    selectedDay: Array,
+    selectedTopic: Object
+
+}
+class Scheduler extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
             selectedDay: DAYS[0],
-            selectedTopic: 'Cardiovascular Disease',
+            selectedTopic: null,
         }
     }
 
     selectedDay = (e) => {
-        this.setState({ selectedDay: e.target.value });
+        this.setState({
+            selectedDay: e.target.value,
+            selectedTopic: null,
+        });
         console.log(this.state.selectedDay);
     };
 
     selectedTopic = (e) => {
+        this.setState({
+            selectedTopic: e.target.value,
+            selectedDay: null
+        });
         console.log(e.target.value);
     };
 
@@ -106,6 +120,22 @@ class Scheduler extends React.Component {
                             </React.Fragment>
                         })}
                     </React.Fragment>
+                })}
+                {topics.map((schedule, index) => {
+                    return <React.Fragment key={index}>
+                        <h2>{schedule.day}</h2>
+                        {schedule.sections.filter(section => section.topicTags.indexOf(this.state.selectedTopic) > -1).map((section, sectionIndex) => {
+                            return <React.Fragment key={'section-' + sectionIndex}>
+                                <h3>{section.topic}</h3>
+                                {section.topics && section.topics.map((time, blockIndex) => {
+                                    return <React.Fragment key={'block' + blockIndex}>
+                                        <p>{time.from} - {time.to}</p>
+                                        <p>{time.text}</p>
+                                    </React.Fragment>
+                                })}
+                            </React.Fragment>;
+                        })}
+                    </React.Fragment>;
                 })}
             </div>
         );

@@ -31,7 +31,7 @@ export const SCHEDULE = [
                         text: 'Registration and Exhibits'
                     }
                 ],
-                topicTags: [TOPIC_TAGS.cardiovascularDisease]
+                topicTags: []
             }
         ],
         dayTags: [DAYS[0], TOPIC_TAGS.cardiovascularDisease]
