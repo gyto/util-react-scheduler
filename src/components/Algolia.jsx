@@ -16,7 +16,8 @@ import {
 import Autosuggest from 'react-autosuggest';
 
 type Props = {
-    hits: Array<Object>
+    hits: Array<Object>,
+    refine: Function
 }
 type State = {
     value: string,
@@ -53,6 +54,7 @@ class Hits extends React.Component<Props, State> {
 
     render() {
         const { hits, currentRefinement, refine } = this.props;
+        console.log('thisprops', this.props);
         console.log('state', this.state);
         return (
             <Autosuggest
@@ -63,8 +65,8 @@ class Hits extends React.Component<Props, State> {
                 getSuggestionValue={hit => hit.brand}
                 renderSuggestion={hit => (
                     <div className="hit-brand">
-                        <Highlight attributeName="material" hit={hit} />
-                        <Highlight attributeName="price" hit={hit} />
+                        <Highlight attribute="material" hit={hit} />
+                        <Highlight attribute="price" hit={hit} />
                         {console.log('hit', hit)}
                     </div>
                 )}
