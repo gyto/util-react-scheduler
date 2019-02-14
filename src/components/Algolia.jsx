@@ -7,7 +7,8 @@ import {
     InstantSearch,
     Configure,
     Index,
-    Highlight,
+    // Highlight,
+    connectHighlight,
 } from 'react-instantsearch-dom';
 import {
     connectAutoComplete,
@@ -41,6 +42,47 @@ const Algolia = () => (
     </InstantSearch>
 );
 
+const Highlight = ({ highlight, attribute, hit }) => {
+    const parsedHit = highlight({
+        highlightProperty: '_highlightResult',
+        attribute,
+        hit,
+    });
+
+    return (
+        <span>
+            {parsedHit.map(
+                (part, index) =>
+                    part.isHighlighted ? (
+                        <mark key={index}>{part.value}</mark>
+                    ) : (
+                        <span key={index}>{part.value}</span>
+                    )
+            )}
+        </span>
+    );
+};
+
+const CustomHighlight = connectHighlight(Highlight);
+
+const theme = {
+    container:                style.container,
+    containerOpen:            style.containerOpen,
+    input:                    style.input,
+    inputOpen:                style.inputOpen,
+    inputFocused:             style.inputFocused,
+    suggestionsContainer:     style.suggestionsContainer,
+    suggestionsContainerOpen: style.suggestionsContainerOpen,
+    suggestionsList:          style.suggestionsList,
+    suggestion:               style.suggestion,
+    suggestionFirst:          style.suggestionFirst,
+    suggestionHighlighted:    style.suggestionHighlighted,
+    sectionContainer:         style.sectionContainer,
+    sectionContainerFirst:    style.sectionContainerFirst,
+    sectionTitle:             style.sectionTitle,
+};
+
+
 class Hits extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
@@ -65,8 +107,8 @@ class Hits extends React.Component<Props, State> {
                 getSuggestionValue={hit => hit.brand}
                 renderSuggestion={hit => (
                     <div className="hit-brand">
-                        <Highlight attribute="material" hit={hit} />
-                        <Highlight attribute="price" hit={hit} />
+                        <CustomHighlight attribute="material" hit={hit} />
+                        <CustomHighlight attribute="price" hit={hit} />
                         {console.log('hit', hit)}
                     </div>
                 )}
@@ -79,6 +121,7 @@ class Hits extends React.Component<Props, State> {
                 }}
                 renderSectionTitle={section => section.index}
                 getSectionSuggestions={section => section.hits}
+                theme={theme}
             />
         );
     }
