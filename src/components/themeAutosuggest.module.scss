@@ -17,3 +17,17 @@
 .suggestionHighlighted {
   background-color: red;
 }
+
+
+.itemContainer {
+  display: flex;
+}
+
+.itemImg {
+  width: 80px;
+  & > img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+  }
+}

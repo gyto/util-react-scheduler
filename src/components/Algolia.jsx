@@ -3,6 +3,8 @@ import * as React from 'react';
 import algoliasearch from 'algoliasearch';
 // import algoilaSettings from '../config/algoial_settings';
 import style from './themeAutosuggest.module.scss';
+import faker from 'faker';
+
 import {
     InstantSearch,
     Configure,
@@ -27,7 +29,7 @@ type State = {
 
 const appID = process.env.REACT_APP_ALGOLIA_APP_ID;
 const searchKey = process.env.REACT_APP_ALGOLIA_API_KEY;
-const indexName = 'products';
+const indexName = 'dev_products';
 
 
 const Algolia = () => (
@@ -50,7 +52,7 @@ const Highlight = ({ highlight, attribute, hit }) => {
     });
 
     return (
-        <span>
+        <>
             {parsedHit.map(
                 (part, index) =>
                     part.isHighlighted ? (
@@ -59,7 +61,7 @@ const Highlight = ({ highlight, attribute, hit }) => {
                         <span key={index}>{part.value}</span>
                     )
             )}
-        </span>
+        </>
     );
 };
 
@@ -106,9 +108,13 @@ class Hits extends React.Component<Props, State> {
                 onSuggestionsClearRequested={() => this.setState({ hits: [] })}
                 getSuggestionValue={hit => hit.brand}
                 renderSuggestion={hit => (
-                    <div className="hit-brand">
+                    <div className={style.itemContainer}>
+                        <figure className={style.itemImg}>
+                            <img src={hit.img} alt=""/>
+                        </figure>
+                        <CustomHighlight attribute="brand" hit={hit} />
                         <CustomHighlight attribute="material" hit={hit} />
-                        <CustomHighlight attribute="price" hit={hit} />
+                        <CustomHighlight attribute="reference" hit={hit} />
                         {console.log('hit', hit)}
                     </div>
                 )}
