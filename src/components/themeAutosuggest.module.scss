@@ -1,14 +1,33 @@
 .tempClass {
   background-color: darkgray;
   padding: 40px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .autoCompleteInput {
+  width: 150px;
+  transition: width 0.3s;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
 
+.autoCompleteInputClosed {
+  width: 150px;
+  transition: width 0.3s;
+  &:hover {
+    border: 1px solid darkslategray;
+  }
+}
+
+.autoCompleteInputOpen {
+  @extend .autoCompleteInput;
+  width: 400px;
+  transition: width 0.3s;
 }
 
 .container {
-  width  : 500px;
+  width  : 100%;
   position: relative;
 }
 
@@ -18,15 +37,17 @@
   position : absolute;
   width    : 100%;
   top      : 34px;
-  left     : 0;
+  right     : 0;
 }
 
 .input {
-  background-color : transparent;
+  background-color : beige;
   color            : #000000;
   height           : 32px;
   width            : 100%;
   border           : 0;
+  border-radius: 2px;
+  //padding: 0 3px;
   font-size: 0.9rem;
   &::placeholder {
     font-size: 0.9rem;

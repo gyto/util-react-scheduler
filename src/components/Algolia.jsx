@@ -14,7 +14,7 @@ type Props = {
 type State = {
     value: string,
     hits: Array<Object>,
-    // visibleSearch: boolean
+    visibleSearch: boolean
 }
 
 const appID = process.env.REACT_APP_ALGOLIA_APP_ID;
@@ -29,7 +29,7 @@ const Algolia = () => (
         onSearchStateChange={searchState => searchState}
     >
         <AutoComplete/>
-        <Configure hitsPerPage={3}/>
+        <Configure hitsPerPage={5}/>
     </InstantSearch>
 );
 
@@ -47,7 +47,7 @@ const Highlight = ({ highlight, attribute, hit }) => {
                     part.isHighlighted ? (
                         <mark key={index}>{part.value}</mark>
                     ) : (
-                        <span key={index}>{part.value}</span>
+                        <React.Fragment key={index}>{part.value}</React.Fragment>
                     )
             )}
         </>
@@ -79,7 +79,7 @@ class Hits extends React.Component<Props, State> {
         this.state = {
             value: '',
             hits: [],
-            // visibleSearch: false,
+            visibleSearch: false,
         };
     }
 
@@ -111,40 +111,43 @@ class Hits extends React.Component<Props, State> {
         );
     };
 
-    handleVisibleSearch = () => {
-        // this.setState({ visibleSearch: true});
-        const search = document.querySelector(style.input);
-        if (search) search.focus();
+    handleSearch = () => {
+        this.setState({ visibleSearch: true });
     };
 
     render() {
-        const { hits } = this.state;
-        const { /*hits,*/ currentRefinement, refine } = this.props;
-        console.log('this props', this.props);
-        console.log('state', this.state);
+        const { visibleSearch, hits } = this.state;
+        const { /*hits, currentRefinement,*/ refine } = this.props;
+
+        const openSearch = (visibleSearch) ? style.autoCompleteInputOpen : style.autoCompleteInputClosed;
+
         return (
             <div className={style.tempClass}>
-                <Autosuggest
-                    suggestions={hits}
-                    multiSection={false}
-                    onSuggestionsFetchRequested={({ value }) => refine(value)}
-                    onSuggestionsClearRequested={() => this.setState({ hits: [] })}
-                    getSuggestionValue={hit => hit.brand}
-                    onSuggestionSelected={this.onSuggestionSelected}
-                    renderSuggestion={this.renderSuggestion}
-                    inputProps={{
-                        placeholder: 'Type a product',
-                        value: this.state.value,
-                        onChange: (event, { newValue }) => {
-                            this.setState({ value: newValue });
-                        },
-                    }}
-                    renderSectionTitle={section => section.index}
-                    getSectionSuggestions={section => section.hits}
-                    id='search'
-                    theme={theme}
-                />
-                <button onClick={this.handleVisibleSearch}>Search</button>
+                <div className={[openSearch, style.autoCompleteInput].join(' ')} onClick={this.handleSearch}>
+                    <Autosuggest
+                        suggestions={hits}
+                        multiSection={false}
+                        onSuggestionsFetchRequested={({ value }) => refine(value)}
+                        onSuggestionsClearRequested={() => this.setState({ hits: [] })}
+                        getSuggestionValue={hit => hit.brand}
+                        onSuggestionSelected={this.onSuggestionSelected}
+                        renderSuggestion={this.renderSuggestion}
+                        inputProps={{
+                            placeholder: 'Type a product',
+                            value: this.state.value,
+                            id: 'search',
+                            onBlur: () => {
+                                this.setState({ visibleSearch: false });
+                            },
+                            onChange: (event, { newValue }) => {
+                                this.setState({ value: newValue });
+                            },
+                        }}
+                        renderSectionTitle={section => section.index}
+                        getSectionSuggestions={section => section.hits}
+                        theme={theme}
+                    />
+                </div>
             </div>
         );
     }
