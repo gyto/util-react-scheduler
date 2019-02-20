@@ -69,19 +69,19 @@ class Search extends React.Component<Props, State> {
 
     onChange = (event, { newValue }) => {
         this.setState({
-            value: newValue
+            value: newValue,
         });
     };
 
     onSuggestionsFetchRequested = ({ value }) => {
         this.setState({
-            suggestions: getSuggestions(value)
+            suggestions: getSuggestions(value),
         });
     };
 
     onSuggestionsClearRequested = () => {
         this.setState({
-            suggestions: []
+            suggestions: [],
         });
     };
 
