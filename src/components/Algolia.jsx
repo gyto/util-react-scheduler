@@ -136,12 +136,8 @@ class Hits extends React.Component<Props, State> {
                             placeholder: 'Type a product',
                             value: this.state.value,
                             id: 'search',
-                            onBlur: () => {
-                                this.setState({ visibleSearch: false });
-                            },
-                            onChange: (event, { newValue }) => {
-                                this.setState({ value: newValue });
-                            },
+                            onBlur: () => this.setState({ visibleSearch: false }),
+                            onChange: (event, { newValue }) => this.setState({ value: newValue }),
                         }}
                         renderSectionTitle={section => section.index}
                         getSectionSuggestions={section => section.hits}

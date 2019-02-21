@@ -1,34 +1,35 @@
 .tempClass {
-  background-color: darkgray;
-  padding: 40px;
-  display: flex;
-  justify-content: flex-end;
+  background-color : darkgray;
+  padding          : 40px;
+  display          : flex;
+  justify-content  : flex-end;
 }
 
 .autoCompleteInput {
-  width: 150px;
-  transition: width 0.3s;
-  border: 1px solid transparent;
-  border-radius: 2px;
+  width         : 150px;
+  transition    : width 0.3s;
+  border        : 1px solid transparent;
+  border-radius : 2px;
 }
 
 .autoCompleteInputClosed {
-  width: 150px;
-  transition: width 0.3s;
+  width      : 150px;
+  transition : width 0.3s;
+  overflow: hidden;
   &:hover {
-    border: 1px solid darkslategray;
+    background-color : rgba(gray, 0.8);
   }
 }
 
 .autoCompleteInputOpen {
   @extend .autoCompleteInput;
-  width: 400px;
-  transition: width 0.3s;
+  width      : 400px;
+  transition : width 0.3s;
 }
 
 .container {
-  width  : 100%;
-  position: relative;
+  width    : 100%;
+  position : relative;
 }
 
 .containerOpen {}
@@ -36,32 +37,32 @@
 .suggestionsContainer {
   position : absolute;
   width    : 100%;
-  top      : 34px;
-  right     : 0;
+  top      : 100%;
+  right    : 0;
 }
 
 .input {
-  background-color : beige;
+  background-color : transparent;
   color            : #000000;
   height           : 32px;
   width            : 100%;
   border           : 0;
-  border-radius: 2px;
-  //padding: 0 3px;
-  font-size: 0.9rem;
+  border-radius    : 2px;
+  font-size        : 0.9rem;
   &::placeholder {
-    font-size: 0.9rem;
+    font-size : 0.9rem;
   }
 }
 
+.inputOpen {
+  border-bottom : 2px solid black;
+}
+
 .inputFocused {
-  //border-bottom : 2px solid black;
   outline : 0;
 }
 
 .suggestionsContainerOpen {
-  //height: 500px;
-  border-top                 : 2px solid black;
   background-color           : beige;
   border-bottom-left-radius  : 4px;
   border-bottom-right-radius : 4px;
