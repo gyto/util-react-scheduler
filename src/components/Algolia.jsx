@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import algoliasearch from 'algoliasearch';
+// import algoliasearch from 'algoliasearch';
 // import algoilaSettings from '../config/algoial_settings';
 import style from './themeAutosuggest.module.scss';
-import { InstantSearch, Configure, Index, connectHighlight } from 'react-instantsearch-dom';
-import { connectAutoComplete, connectStateResults } from 'react-instantsearch/connectors';
+import { InstantSearch, Configure, /*Index,*/ connectHighlight } from 'react-instantsearch-dom';
+import { connectAutoComplete } from 'react-instantsearch/connectors';
 import Autosuggest from 'react-autosuggest';
 
 type Props = {
@@ -150,11 +150,6 @@ class Hits extends React.Component<Props, State> {
 }
 
 const AutoComplete = connectAutoComplete(Hits);
-
-const Loading = connectStateResults(({ searching }) => {
-    console.log('searching', searching);
-    return <div>{searching}</div>;
-});
 
 export default Algolia;
 
