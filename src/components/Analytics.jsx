@@ -19,7 +19,7 @@ class Analytics extends React.Component<{}> {
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
                     pointBorderColor: 'rgba(75,192,192,1)',
-                    pointBackgroundColor: '#fff',
+                    pointBackgroundColor: '#00ffb7',
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
                     pointHoverBackgroundColor: 'rgba(75,192,192,1)',
@@ -41,7 +41,7 @@ class Analytics extends React.Component<{}> {
                     data: [69, 49, 85, 93, 15, 12, 27],
                     // lineTension: 0,
                 },
-            ]
+            ],
         };
 
         return (

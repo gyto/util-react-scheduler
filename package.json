@@ -19,7 +19,9 @@
     "react-router-dom": "^4.3.1",
     "react-sanfona": "^1.4.0",
     "react-scripts": "^2.1.5",
-    "react-sortable-tree": "^2.6.0"
+    "react-select": "^2.4.1",
+    "react-sortable-tree": "^2.6.0",
+    "yarn": "^1.13.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-flow-strip-types": "^7.0.0",
