@@ -19,6 +19,14 @@ type ResponseData = Object & {
 const API_LINK = process.env.REACT_APP_NEWS_API_LINK;
 const API_KEY = process.env.REACT_APP_NEWS_API;
 
+const linkStyle = {
+    fontSize: '12px',
+    color: '#fff',
+    backgroundColor: '#008cff',
+    borderRadius: '4px',
+    padding: '3px',
+};
+
 export default class RestApiLoop extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
@@ -50,9 +58,14 @@ export default class RestApiLoop extends React.Component<Props, State> {
 
         return <>
             {news.map((article, index) => {
-                return <div key={index}>
-                    {article.description}
-                </div>;
+                return <p key={index}>
+                    {article.description} - <a
+                        href={article.url}
+                        rel='noopener noreferrer'
+                        target='_blank'
+                        style={linkStyle}
+                    >link</a>
+                </p>;
             })}
         </>;
     }

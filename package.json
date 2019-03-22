@@ -9,6 +9,7 @@
     "chart.js": "^2.7.3",
     "faker": "^4.1.0",
     "flow-bin": "^0.85.0",
+    "localforage": "^1.7.3",
     "lodash.camelcase": "^4.3.0",
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
@@ -18,11 +19,14 @@
     "react-dom": "^16.7.0",
     "react-instantsearch": "^5.4.0",
     "react-instantsearch-dom": "^5.4.0",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-sanfona": "^1.4.0",
     "react-scripts": "^2.1.5",
     "react-select": "^2.4.1",
     "react-sortable-tree": "^2.6.0",
+    "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
     "yarn": "^1.13.0"
   },
   "devDependencies": {
