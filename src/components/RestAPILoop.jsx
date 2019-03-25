@@ -37,6 +37,10 @@ export default class RestApiLoop extends React.Component<Props, State> {
     }
 
     componentDidMount(): void {
+        this.fetchApi();
+    }
+
+    fetchApi = () => {
         const queries = ['country=us', 'country=ua'];
         /**
          * link example https://newsapi.org/v2/top-headlines?country=us&apiKey=key
@@ -51,7 +55,7 @@ export default class RestApiLoop extends React.Component<Props, State> {
                     news: [...prevState.news, ...response.data.articles],
                 }));
             })).catch(error => console.log(error));
-    }
+    };
 
     handleRemove = (id: number) => {
         this.setState(({news}) => {
@@ -61,13 +65,20 @@ export default class RestApiLoop extends React.Component<Props, State> {
         });
     };
 
+    handleRemoveAll = () => {
+        this.setState({ news: []});
+    };
+
     render() {
         const { news } = this.state;
 
         return <>
+            <div>
+                <button onClick={this.handleRemoveAll}>Remove All</button>
+            </div>
             {news.map((article, index) => {
                 return <p key={index}>
-                    {article.description} - <a
+                    {article.title} - <a
                         href={article.url}
                         rel='noopener noreferrer'
                         target='_blank'
