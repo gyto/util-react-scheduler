@@ -41,17 +41,25 @@ export default class RestApiLoop extends React.Component<Props, State> {
         /**
          * link example https://newsapi.org/v2/top-headlines?country=us&apiKey=key
          */
-        queries.forEach(query => {
-            axios.get(`${API_LINK}/top-headlines?${query}&apiKey=${API_KEY}`)
-                .then((response: ResponseData) => {
-                    // queryArr.push(...response.data.articles);
-                    this.setState(prevState => ({
-                        news: [...prevState.news, ...response.data.articles],
-                    }));
-                })
-                .catch(error => console.log(error));
-        });
+
+        let requests = queries.map(query => axios
+            .get(`${API_LINK}/top-headlines?${query}&apiKey=${API_KEY}`));
+
+        axios.all(requests)
+            .then((responses: ResponseData[]) => responses.forEach(response => {
+                this.setState(prevState => ({
+                    news: [...prevState.news, ...response.data.articles],
+                }));
+            })).catch(error => console.log(error));
     }
+
+    handleRemove = (id: number) => {
+        this.setState(({news}) => {
+            let item = [ ...news ];
+            item.splice(id, 1);
+            return { news: item };
+        });
+    };
 
     render() {
         const { news } = this.state;
@@ -65,6 +73,7 @@ export default class RestApiLoop extends React.Component<Props, State> {
                         target='_blank'
                         style={linkStyle}
                     >link</a>
+                    <button onClick={() => this.handleRemove(index)}>Remove</button>
                 </p>;
             })}
         </>;
