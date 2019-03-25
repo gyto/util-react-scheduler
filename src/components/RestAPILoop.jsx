@@ -25,6 +25,13 @@ const linkStyle = {
     backgroundColor: '#008cff',
     borderRadius: '4px',
     padding: '3px',
+    border: 0,
+    textDecoration: 'none',
+};
+
+const removeStyle = {
+    ...linkStyle,
+    backgroundColor: '#d32f2f',
 };
 
 export default class RestApiLoop extends React.Component<Props, State> {
@@ -84,7 +91,10 @@ export default class RestApiLoop extends React.Component<Props, State> {
                         target='_blank'
                         style={linkStyle}
                     >link</a>
-                    <button onClick={() => this.handleRemove(index)}>Remove</button>
+                    <button
+                        onClick={() => this.handleRemove(index)}
+                        style={removeStyle}
+                    >Remove</button>
                 </p>;
             })}
         </>;
