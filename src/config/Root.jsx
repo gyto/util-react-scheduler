@@ -11,6 +11,7 @@ import CreateRawData from '../components/CreateRawData';
 import TableFilter from '../components/TableFilter';
 import RestApiLoop from '../components/RestAPILoop';
 import Cart from '../components/Cart';
+import Tabs from '../components/Tabs';
 
 class Root extends React.Component<{}> {
     render() {
@@ -27,6 +28,7 @@ class Root extends React.Component<{}> {
                         <li><Link to='/table'>Table Filtering</Link></li>
                         <li><Link to='/rest-api-loop'>Rest API Loop with Log</Link></li>
                         <li><Link to='/cart'>Cart</Link></li>
+                        <li><Link to='/tabs'>Tabs</Link></li>
                     </ul>
 
                     <Route path='/' exact component={SchedulerBuilder} />
@@ -38,6 +40,7 @@ class Root extends React.Component<{}> {
                     <Route path='/table' component={TableFilter} />
                     <Route path='/rest-api-loop' component={RestApiLoop} />
                     <Route path='/cart' component={Cart} />
+                    <Route path='/tabs' component={Tabs} />
                 </nav>
             </Router>
         );
