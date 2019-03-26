@@ -1,0 +1,11 @@
+[ignore]
+
+[untyped]
+.*/node_modules/redux-persist/es/integration/*
+
+[include]
+
+[libs]
+./src/utils/cssModule.js
+
+[options]
