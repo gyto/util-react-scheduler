@@ -1,0 +1,615 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ItemList matches snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ItemList
+    itemClick={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <button
+          onClick={[Function]}
+          style={
+            Object {
+              "border": "1px solid gray",
+              "display": "flex",
+              "width": "200px",
+            }
+          }
+        >
+          <img
+            alt="Random Name"
+            src="https://source.unsplash.com/random/50x50"
+          />
+          <h4>
+            Random Name
+          </h4>
+        </button>,
+        <button
+          onClick={[Function]}
+          style={
+            Object {
+              "border": "1px solid gray",
+              "display": "flex",
+              "width": "200px",
+            }
+          }
+        >
+          <img
+            alt="Random Name"
+            src="https://source.unsplash.com/random/50x50"
+          />
+          <h4>
+            Random Name
+          </h4>
+        </button>,
+        <button
+          onClick={[Function]}
+          style={
+            Object {
+              "border": "1px solid gray",
+              "display": "flex",
+              "width": "200px",
+            }
+          }
+        >
+          <img
+            alt="Random Name"
+            src="https://source.unsplash.com/random/50x50"
+          />
+          <h4>
+            Random Name
+          </h4>
+        </button>,
+        <button
+          onClick={[Function]}
+          style={
+            Object {
+              "border": "1px solid gray",
+              "display": "flex",
+              "width": "200px",
+            }
+          }
+        >
+          <img
+            alt="Random Name"
+            src="https://source.unsplash.com/random/50x50"
+          />
+          <h4>
+            Random Name
+          </h4>
+        </button>,
+      ],
+      "style": Object {
+        "display": "flex",
+        "flexDirection": "column",
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": "0",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <img
+              alt="Random Name"
+              src="https://source.unsplash.com/random/50x50"
+            />,
+            <h4>
+              Random Name
+            </h4>,
+          ],
+          "onClick": [Function],
+          "style": Object {
+            "border": "1px solid gray",
+            "display": "flex",
+            "width": "200px",
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "alt": "Random Name",
+              "src": "https://source.unsplash.com/random/50x50",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "img",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Random Name",
+            },
+            "ref": null,
+            "rendered": "Random Name",
+            "type": "h4",
+          },
+        ],
+        "type": "button",
+      },
+      Object {
+        "instance": null,
+        "key": "1",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <img
+              alt="Random Name"
+              src="https://source.unsplash.com/random/50x50"
+            />,
+            <h4>
+              Random Name
+            </h4>,
+          ],
+          "onClick": [Function],
+          "style": Object {
+            "border": "1px solid gray",
+            "display": "flex",
+            "width": "200px",
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "alt": "Random Name",
+              "src": "https://source.unsplash.com/random/50x50",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "img",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Random Name",
+            },
+            "ref": null,
+            "rendered": "Random Name",
+            "type": "h4",
+          },
+        ],
+        "type": "button",
+      },
+      Object {
+        "instance": null,
+        "key": "2",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <img
+              alt="Random Name"
+              src="https://source.unsplash.com/random/50x50"
+            />,
+            <h4>
+              Random Name
+            </h4>,
+          ],
+          "onClick": [Function],
+          "style": Object {
+            "border": "1px solid gray",
+            "display": "flex",
+            "width": "200px",
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "alt": "Random Name",
+              "src": "https://source.unsplash.com/random/50x50",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "img",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Random Name",
+            },
+            "ref": null,
+            "rendered": "Random Name",
+            "type": "h4",
+          },
+        ],
+        "type": "button",
+      },
+      Object {
+        "instance": null,
+        "key": "3",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <img
+              alt="Random Name"
+              src="https://source.unsplash.com/random/50x50"
+            />,
+            <h4>
+              Random Name
+            </h4>,
+          ],
+          "onClick": [Function],
+          "style": Object {
+            "border": "1px solid gray",
+            "display": "flex",
+            "width": "200px",
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "alt": "Random Name",
+              "src": "https://source.unsplash.com/random/50x50",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "img",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Random Name",
+            },
+            "ref": null,
+            "rendered": "Random Name",
+            "type": "h4",
+          },
+        ],
+        "type": "button",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <button
+            onClick={[Function]}
+            style={
+              Object {
+                "border": "1px solid gray",
+                "display": "flex",
+                "width": "200px",
+              }
+            }
+          >
+            <img
+              alt="Random Name"
+              src="https://source.unsplash.com/random/50x50"
+            />
+            <h4>
+              Random Name
+            </h4>
+          </button>,
+          <button
+            onClick={[Function]}
+            style={
+              Object {
+                "border": "1px solid gray",
+                "display": "flex",
+                "width": "200px",
+              }
+            }
+          >
+            <img
+              alt="Random Name"
+              src="https://source.unsplash.com/random/50x50"
+            />
+            <h4>
+              Random Name
+            </h4>
+          </button>,
+          <button
+            onClick={[Function]}
+            style={
+              Object {
+                "border": "1px solid gray",
+                "display": "flex",
+                "width": "200px",
+              }
+            }
+          >
+            <img
+              alt="Random Name"
+              src="https://source.unsplash.com/random/50x50"
+            />
+            <h4>
+              Random Name
+            </h4>
+          </button>,
+          <button
+            onClick={[Function]}
+            style={
+              Object {
+                "border": "1px solid gray",
+                "display": "flex",
+                "width": "200px",
+              }
+            }
+          >
+            <img
+              alt="Random Name"
+              src="https://source.unsplash.com/random/50x50"
+            />
+            <h4>
+              Random Name
+            </h4>
+          </button>,
+        ],
+        "style": Object {
+          "display": "flex",
+          "flexDirection": "column",
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": "0",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <img
+                alt="Random Name"
+                src="https://source.unsplash.com/random/50x50"
+              />,
+              <h4>
+                Random Name
+              </h4>,
+            ],
+            "onClick": [Function],
+            "style": Object {
+              "border": "1px solid gray",
+              "display": "flex",
+              "width": "200px",
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Random Name",
+                "src": "https://source.unsplash.com/random/50x50",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Random Name",
+              },
+              "ref": null,
+              "rendered": "Random Name",
+              "type": "h4",
+            },
+          ],
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": "1",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <img
+                alt="Random Name"
+                src="https://source.unsplash.com/random/50x50"
+              />,
+              <h4>
+                Random Name
+              </h4>,
+            ],
+            "onClick": [Function],
+            "style": Object {
+              "border": "1px solid gray",
+              "display": "flex",
+              "width": "200px",
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Random Name",
+                "src": "https://source.unsplash.com/random/50x50",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Random Name",
+              },
+              "ref": null,
+              "rendered": "Random Name",
+              "type": "h4",
+            },
+          ],
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": "2",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <img
+                alt="Random Name"
+                src="https://source.unsplash.com/random/50x50"
+              />,
+              <h4>
+                Random Name
+              </h4>,
+            ],
+            "onClick": [Function],
+            "style": Object {
+              "border": "1px solid gray",
+              "display": "flex",
+              "width": "200px",
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Random Name",
+                "src": "https://source.unsplash.com/random/50x50",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Random Name",
+              },
+              "ref": null,
+              "rendered": "Random Name",
+              "type": "h4",
+            },
+          ],
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": "3",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <img
+                alt="Random Name"
+                src="https://source.unsplash.com/random/50x50"
+              />,
+              <h4>
+                Random Name
+              </h4>,
+            ],
+            "onClick": [Function],
+            "style": Object {
+              "border": "1px solid gray",
+              "display": "flex",
+              "width": "200px",
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Random Name",
+                "src": "https://source.unsplash.com/random/50x50",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Random Name",
+              },
+              "ref": null,
+              "rendered": "Random Name",
+              "type": "h4",
+            },
+          ],
+          "type": "button",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__childContext__): null,
+}
+`;

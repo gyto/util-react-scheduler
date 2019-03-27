@@ -30,7 +30,7 @@ class Tabs extends React.Component<Props, State> {
         const { selectedProduct } = this.state;
         return (
             <div style={panel}>
-                <ItemList onClick={this.openTab}/>
+                <ItemList itemClick={this.openTab}/>
                 <ItemPanel selected={selectedProduct}/>
             </div>
         );

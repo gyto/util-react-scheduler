@@ -4,7 +4,7 @@ import { PRODUCTS } from '../../api/producs';
 import type { Products } from '../types/Products';
 
 type Props = {
-    onClick: (index: number) => void,
+    itemClick: (index: number) => void,
 }
 
 type State = {
@@ -33,14 +33,14 @@ class ItemList extends React.Component<Props, State> {
 
     render() {
         const { products } = this.state;
-        const { onClick } = this.props;
+        const { itemClick } = this.props;
         return (
             <div style={boxes}>
                 {products.map((item, index) => {
-                    return <div key={index} style={boxStyle} onClick={() => onClick(item.id)}>
+                    return <button key={index} style={boxStyle} onClick={() => itemClick(item.id)}>
                         <img src={item.img} alt={item.name} />
                         <h4>{item.name}</h4>
-                    </div>;
+                    </button>;
                 })}
             </div>
         );
