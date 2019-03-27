@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { PRODUCTS } from "../../api/producs";
-import type { Products } from "../types/Products";
+import { PRODUCTS } from '../../api/producs';
+import type { Products } from '../types/Products';
 
 type Props = {
     onClick: (index: number) => void,
