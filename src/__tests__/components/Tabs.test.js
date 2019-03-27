@@ -50,6 +50,7 @@ describe('Tabs', () => {
     beforeEach(() => {
         jest.clearAllMocks();
 
+        shallowRender = undefined;
         mountedRender = undefined;
     });
 
