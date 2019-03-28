@@ -12,62 +12,62 @@ export const DATABASE_REF = {
 export default class FirebaseRealDB {
     /**
      * Create Instance with given object
-     * @param databaseName
+     * @param instanceName
      * @param itemObj
      */
-    createInstance(databaseName: string, itemObj: Object) {
+    createInstance(instanceName: string, itemObj: Object) {
         return firebase
             .database()
-            .ref(databaseName)
+            .ref(instanceName)
             .push(itemObj);
     }
 
     /**
      * Read Instance of give Database
-     * @param databaseName
+     * @param instanceName
      * @returns {firebase.database.Reference}
      */
-    readInstance(databaseName: string) {
+    readInstance(instanceName: string) {
         return firebase
             .database()
-            .ref(databaseName);
+            .ref(instanceName);
     }
 
     /**
      * Read Single Instance of given Database and objectId
-     * @param databaseName
+     * @param instanceName
      * @param objectId
      * @returns {firebase.database.Reference}
      */
-    readSingleInstance(databaseName: string, objectId: string) {
+    readSingleInstance(instanceName: string, objectId: string) {
         return firebase
             .database()
-            .ref(`${databaseName}/${objectId}`);
+            .ref(`${instanceName}/${objectId}`);
     }
 
     /**
      * Update Instance with given Database, objectId, and itemObj to update
-     * @param databaseName
+     * @param instanceName
      * @param objectId
      * @param itemObj
      * @returns {Promise<any>}
      */
-    updateInstance(databaseName: string, objectId: string, itemObj: Object) {
+    updateInstance(instanceName: string, objectId: string, itemObj: Object) {
         return firebase
             .database()
-            .ref(`${databaseName}/${objectId}`)
+            .ref(`${instanceName}/${objectId}`)
             .update(itemObj);
     }
 
     /**
      * Delete Instance with passing objectID
-     * @param databaseName
+     * @param instanceName
      * @param objectId
      */
-    deleteInstance(databaseName: string, objectId: string) {
+    deleteInstance(instanceName: string, objectId: string) {
         return firebase
             .database()
-            .ref(`${databaseName}/${objectId}`)
+            .ref(`${instanceName}/${objectId}`)
             .remove();
     }
 }

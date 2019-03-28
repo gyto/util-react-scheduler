@@ -1,0 +1,45 @@
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #e4eafc;
+  margin-bottom: 12px;
+  width: 100%;
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+}
+
+.item {
+  flex: 2;
+
+  .name {
+    margin: 0;
+  }
+
+  .osm {
+    margin: 3px 0;
+  }
+
+  .desc {
+    font-size: 80%;
+    color: gray;
+    margin: 0;
+  }
+}
+
+.button {
+  border: 0;
+  background: transparent;
+  color: #2e5bff;
+  font-weight: bold;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  flex: 0 0 100px;
+  cursor: pointer;
+}

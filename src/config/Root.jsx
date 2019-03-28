@@ -13,6 +13,7 @@ import RestApiLoop from '../components/RestAPILoop';
 import Cart from '../components/Cart';
 import Tabs from '../components/Tabs';
 import Firebase from '../components/Firebase';
+import Services from '../components/Scheduler/Services';
 
 class Root extends React.Component<{}> {
     render() {
@@ -31,6 +32,7 @@ class Root extends React.Component<{}> {
                         <li><Link to='/cart'>Cart</Link></li>
                         <li><Link to='/tabs'>Tabs</Link></li>
                         <li><Link to='/firebase'>Firebase</Link></li>
+                        <li><Link to='/services'>Services</Link></li>
                     </ul>
 
                     <Route path='/' exact component={SchedulerBuilder} />
@@ -44,6 +46,7 @@ class Root extends React.Component<{}> {
                     <Route path='/cart' component={Cart} />
                     <Route path='/tabs' component={Tabs} />
                     <Route path='/firebase' component={Firebase} />
+                    <Route path='/services' component={Services} />
                 </nav>
             </Router>
         );
