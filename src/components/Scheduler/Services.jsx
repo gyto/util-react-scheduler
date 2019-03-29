@@ -11,9 +11,13 @@ type State = {}
 class Services extends React.Component<Props, State> {
     render() {
         return (
-            <div className={styles.container}>
-                <Service />
-                <ServicePanel />
+            <div id='outer-container'>
+                <div className={styles.container}>
+                    <ServicePanel />
+                    <div id="page-wrap">
+                        <Service />
+                    </div>
+                </div>
             </div>
         );
     }

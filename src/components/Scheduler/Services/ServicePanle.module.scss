@@ -14,20 +14,20 @@
 }
 
 .menu {
-  width: calc(100% - 60px);
+  //width: calc(100% - 60px);
   height: 100vh;
   background-color: white;
-  position: absolute;
-  top: 0;
-  left: 0;
+  //position: absolute;
+  //top: 0;
+  //left: 0;
 
-  &:after {
-    content: '';
-    background-color: rgba(#2e384d, 0.5);
-    width: 100px;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    right: -100px;
-  }
+  //&:after {
+  //  content: '';
+  //  background-color: rgba(#2e384d, 0.5);
+  //  width: 100px;
+  //  height: 100vh;
+  //  position: absolute;
+  //  top: 0;
+  //  right: -100px;
+  //}
 }

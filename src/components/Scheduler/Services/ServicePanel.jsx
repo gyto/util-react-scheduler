@@ -3,6 +3,7 @@ import * as React from 'react';
 import FirebaseRealDB, { DATABASE_REF } from '../../../utils/FirebaseRealDB';
 import moment from 'moment';
 import styles from './ServicePanle.module.scss';
+import { push as Menu } from 'react-burger-menu'
 
 type Props = {}
 
@@ -67,7 +68,7 @@ class ServicePanel extends React.Component<Props, State> {
             duration,
             price,
             desc,
-            openPanel
+            openPanel,
         } = this.state;
 
         return <>
@@ -75,9 +76,12 @@ class ServicePanel extends React.Component<Props, State> {
                 className={styles.addButton}
                 onClick={() => this.setState({openPanel: true})}
             >Add</button>
-            {!openPanel
-                ? ''
-                : <div className={styles.menu}>
+            <Menu
+                isOpen={openPanel}
+                pageWrapId={ 'page-wrap' }
+                outerContainerId={ 'outer-container' }
+            >
+                <div className={styles.menu}>
                     <form onSubmit={this.handleSubmit}>
                         <input
                             type="text"
@@ -110,7 +114,7 @@ class ServicePanel extends React.Component<Props, State> {
                         <button>Submit</button>
                     </form>
                 </div>
-            }
+            </Menu>
         </>;
     }
 }
