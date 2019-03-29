@@ -3,7 +3,8 @@ import * as React from 'react';
 import FirebaseRealDB, { DATABASE_REF } from '../../../utils/FirebaseRealDB';
 import moment from 'moment';
 import styles from './ServicePanle.module.scss';
-import { push as Menu } from 'react-burger-menu'
+import MenuContainer from '../containers/MenuContainer';
+
 
 type Props = {}
 
@@ -76,11 +77,7 @@ class ServicePanel extends React.Component<Props, State> {
                 className={styles.addButton}
                 onClick={() => this.setState({openPanel: true})}
             >Add</button>
-            <Menu
-                isOpen={openPanel}
-                pageWrapId={ 'page-wrap' }
-                outerContainerId={ 'outer-container' }
-            >
+            <MenuContainer open={openPanel}>
                 <div className={styles.menu}>
                     <form onSubmit={this.handleSubmit}>
                         <input
@@ -89,6 +86,8 @@ class ServicePanel extends React.Component<Props, State> {
                             onChange={this.handleInputChange}
                             value={name}
                             required
+                            autoFocus={openPanel}
+                            className={styles.input}
                         />
                         <input
                             type="number"
@@ -97,6 +96,7 @@ class ServicePanel extends React.Component<Props, State> {
                             onChange={this.handleInputChange}
                             value={duration}
                             required
+                            className={styles.input}
                         />
                         <input
                             type="number"
@@ -105,16 +105,18 @@ class ServicePanel extends React.Component<Props, State> {
                             onChange={this.handleInputChange}
                             value={price}
                             required
+                            className={styles.input}
                         />
                         <textarea
                             name='desc'
                             onChange={this.handleInputChange}
                             value={desc}
+                            className={styles.textArea}
                         />
-                        <button>Submit</button>
+                        <button className={styles.save}>Submit</button>
                     </form>
                 </div>
-            </Menu>
+            </MenuContainer>
         </>;
     }
 }
