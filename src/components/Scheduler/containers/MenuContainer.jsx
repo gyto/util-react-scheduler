@@ -5,6 +5,7 @@ import { push as Menu } from 'react-burger-menu';
 type Props = {
     children: React.Node,
     open: boolean,
+    onStateChange: () => void,
 }
 
 class MenuContainer extends React.Component<Props> {
@@ -16,6 +17,8 @@ class MenuContainer extends React.Component<Props> {
                 outerContainerId='outer-container'
                 customCrossIcon={ false }
                 customBurgerIcon={ false }
+                disableAutoFocus
+                onStateChange={this.props.onStateChange}
             >
                 {this.props.children}
             </Menu>

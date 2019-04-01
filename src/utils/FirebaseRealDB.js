@@ -42,7 +42,8 @@ export default class FirebaseRealDB {
     readSingleInstance(instanceName: string, objectId: string) {
         return firebase
             .database()
-            .ref(`${instanceName}/${objectId}`);
+            .ref(`${instanceName}/${objectId}`)
+            .once('value');
     }
 
     /**

@@ -4,13 +4,15 @@ import type { Services } from '../types/Services';
 import FirebaseRealDB, { DATABASE_REF } from '../../../utils/FirebaseRealDB';
 import styles from './Service.module.scss';
 
-type Props = {}
+type Props = {
+    callbackId: (id: string) => void
+}
 
 type State = {
     services: Services[],
 }
 
-class Service extends React.Component<Props, State> {
+export class Service extends React.Component<Props, State> {
     fdb: FirebaseRealDB;
 
     constructor(props: Props) {
@@ -47,9 +49,9 @@ class Service extends React.Component<Props, State> {
     }
 
     render() {
-        const {
-            services,
-        } = this.state;
+        const { services } = this.state;
+        const { callbackId } = this.props;
+
         return (
             <div className={styles.boxes}>
                 {services.map(service => {
@@ -63,7 +65,10 @@ class Service extends React.Component<Props, State> {
                                 <p className={styles.osm}>{service.duration} min - ${service.price}</p>
                                 {serviceDesc}
                             </div>
-                            <button className={styles.button}>Manage</button>
+                            <button
+                                className={styles.button}
+                                onClick={() => callbackId(service.id)}
+                            >Manage</button>
                         </div>
                     );
                 })}

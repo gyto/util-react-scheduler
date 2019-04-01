@@ -2,18 +2,21 @@
 import * as React from 'react';
 import FirebaseRealDB, { DATABASE_REF } from '../../../utils/FirebaseRealDB';
 import moment from 'moment';
-import styles from './ServicePanle.module.scss';
+import styles from './ServicePanel.module.scss';
 import MenuContainer from '../containers/MenuContainer';
 
 
-type Props = {}
+type Props = {
+    openPanel: boolean,
+    onStateChange: () => void,
+    serviceId?: ?string,
+}
 
 type State = {
     name: string,
     duration: ?number,
     price: ?number,
     desc: ?string,
-    openPanel: boolean,
 }
 
 class ServicePanel extends React.Component<Props, State> {
@@ -27,11 +30,21 @@ class ServicePanel extends React.Component<Props, State> {
             duration: 0,
             price: 0,
             desc: '',
-            openPanel: false,
         };
 
         this.fdb = new FirebaseRealDB();
     }
+
+    componentDidUpdate(prevProps: Props) {
+        if (this.props.serviceId && this.props.serviceId !== prevProps.serviceId) {
+            this.fetchData(this.props.serviceId);
+        }
+    }
+
+    fetchData = (id: string) => {
+        this.fdb.readSingleInstance(DATABASE_REF.services, id)
+            .then(snapshot => console.log(snapshot.val()));
+    };
 
     handleSubmit = (e: SyntheticEvent<HTMLButtonElement>): void => {
         e.preventDefault();
@@ -69,46 +82,66 @@ class ServicePanel extends React.Component<Props, State> {
             duration,
             price,
             desc,
-            openPanel,
         } = this.state;
 
+        const { openPanel, onStateChange } = this.props;
+
         return <>
-            <button
-                className={styles.addButton}
-                onClick={() => this.setState({openPanel: true})}
-            >Add</button>
-            <MenuContainer open={openPanel}>
+            <MenuContainer
+                open={openPanel}
+                onStateChange={onStateChange}
+            >
                 <div className={styles.menu}>
                     <form onSubmit={this.handleSubmit}>
+                        <label
+                            htmlFor="nameInput"
+                            className={styles.label}
+                        >Name</label>
                         <input
                             type="text"
                             name='name'
+                            id='nameInput'
                             onChange={this.handleInputChange}
                             value={name}
                             required
                             autoFocus={openPanel}
                             className={styles.input}
                         />
+                        <label
+                            htmlFor="durationInput"
+                            className={styles.label}
+                        >Duration</label>
                         <input
                             type="number"
                             name='duration'
+                            id='durationInput'
                             min='1'
                             onChange={this.handleInputChange}
                             value={duration}
                             required
                             className={styles.input}
                         />
+                        <label
+                            htmlFor="priceInput"
+                            className={styles.label}
+                        >Price</label>
                         <input
                             type="number"
                             name='price'
+                            id='priceInput'
                             min='1'
                             onChange={this.handleInputChange}
                             value={price}
                             required
                             className={styles.input}
                         />
+                        <label
+                            htmlFor="descInput"
+                            className={styles.label}
+                        >Desc</label>
                         <textarea
                             name='desc'
+                            id='descInput'
                             onChange={this.handleInputChange}
                             value={desc}
                             className={styles.textArea}
