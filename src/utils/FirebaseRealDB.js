@@ -4,6 +4,7 @@ import firebase from '../config/firebase';
 // DATABASE NAMES
 export const DATABASE_REF = {
     services: 'services',
+    events: 'events',
 };
 
 /**

@@ -1,16 +1,7 @@
-@import "../containers/FormInput.module";
-
 .menu {
     background-color: white;
     height: 100%;
     padding: 15px 14px 30px;
-}
-
-.textArea {
-    @extend %input;
-    height: 100px;
-    resize: none;
-    padding-top: 6px;
 }
 
 .buttons {

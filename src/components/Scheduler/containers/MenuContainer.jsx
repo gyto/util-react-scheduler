@@ -5,7 +5,7 @@ import { push as Menu } from 'react-burger-menu';
 type Props = {
     children: React.Node,
     open: boolean,
-    onStateChange: () => void,
+    onStateChange: (e?: SyntheticEvent<HTMLInputElement>) => (void),
 }
 
 class MenuContainer extends React.Component<Props> {

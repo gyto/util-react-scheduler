@@ -6,6 +6,8 @@ import styles from './ServicePanel.module.scss';
 import MenuContainer from '../containers/MenuContainer';
 import { connect } from 'react-redux';
 import { toggleMenu } from '../../../actions/toggleMenu';
+import type { Services } from '../types/Services';
+import FormInput from "../containers/FormInput";
 
 
 type Props = {
@@ -15,11 +17,7 @@ type Props = {
 }
 
 type State = {
-    name: string,
-    duration: ?number,
-    price: ?number,
-    desc: ?string,
-    timeModified: ?Date,
+    ...Services,
     submitType: string,
 }
 
@@ -152,47 +150,31 @@ export class ServicePanel extends React.Component<Props, State> {
                 <div className={styles.menu}>
                     <h2>{serviceId ? 'Edit Service' : 'Create Service'}</h2>
                     <form onSubmit={event => this.handleSubmit(event, submitType)}>
-                        <label
-                            htmlFor="nameInput"
-                            className={styles.label}
-                        >Name</label>
-                        <input
-                            type="text"
-                            name='name'
-                            id='nameInput'
+                        <FormInput
+                            labelName='name'
                             onChange={this.handleInputChange}
-                            value={name}
+                            inputValue={name}
                             required
-                            autoFocus={menu}
-                            className={styles.input}
                         />
-                        <label
-                            htmlFor="durationInput"
-                            className={styles.label}
-                        >Duration</label>
-                        <input
-                            type="number"
-                            name='duration'
-                            id='durationInput'
-                            min='1'
+                        <FormInput
+                            labelName='duration'
                             onChange={this.handleInputChange}
-                            value={duration}
+                            inputValue={duration}
+                            inputType='number'
                             required
-                            className={styles.input}
+                            inputProps={{
+                                min: 1,
+                            }}
                         />
-                        <label
-                            htmlFor="priceInput"
-                            className={styles.label}
-                        >Price</label>
-                        <input
-                            type="number"
-                            name='price'
-                            id='priceInput'
-                            min='1'
+                        <FormInput
+                            labelName='price'
                             onChange={this.handleInputChange}
-                            value={price}
+                            inputValue={price}
+                            inputType='number'
                             required
-                            className={styles.input}
+                            inputProps={{
+                                min: 1,
+                            }}
                         />
                         <label
                             htmlFor="descInput"
