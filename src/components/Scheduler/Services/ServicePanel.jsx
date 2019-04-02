@@ -5,13 +5,13 @@ import moment from 'moment';
 import styles from './ServicePanel.module.scss';
 import MenuContainer from '../containers/MenuContainer';
 import { connect } from 'react-redux';
-import { toggleServiceMenu } from '../../../actions/toggleServiceMenu';
+import { toggleMenu } from '../../../actions/toggleMenu';
 
 
 type Props = {
     serviceId?: ?string,
-    toggleServiceMenu: (boolean) => void,
-    serviceMenu: boolean,
+    toggleMenu: (boolean) => void,
+    menu: boolean,
 }
 
 type State = {
@@ -88,7 +88,7 @@ export class ServicePanel extends React.Component<Props, State> {
             this.fdb.updateInstance(DATABASE_REF.services, this.props.serviceId, item);
         }
 
-        this.props.toggleServiceMenu(false);
+        this.props.toggleMenu(false);
         this.setState({
             name: '',
             duration: 0,
@@ -111,14 +111,14 @@ export class ServicePanel extends React.Component<Props, State> {
     handleDelete = () => {
         if (this.props.serviceId) {
             this.fdb.deleteInstance(DATABASE_REF.services, this.props.serviceId);
-            this.props.toggleServiceMenu(false);
+            this.props.toggleMenu(false);
             this.setState({ submitType: SUBMIT_TYPE.save });
         }
     };
 
     handleStateChange = (state: {isOpen: boolean}) => {
-        if (this.props.serviceMenu && !state.isOpen) {
-            this.props.toggleServiceMenu(false);
+        if (this.props.menu && !state.isOpen) {
+            this.props.toggleMenu(false);
             this.setState({
                 name: '',
                 duration: 0,
@@ -140,13 +140,13 @@ export class ServicePanel extends React.Component<Props, State> {
         } = this.state;
 
         const {
-            serviceMenu,
+            menu,
             serviceId,
         } = this.props;
 
         return <>
             <MenuContainer
-                open={serviceMenu}
+                open={menu}
                 onStateChange={this.handleStateChange}
             >
                 <div className={styles.menu}>
@@ -163,7 +163,7 @@ export class ServicePanel extends React.Component<Props, State> {
                             onChange={this.handleInputChange}
                             value={name}
                             required
-                            autoFocus={serviceMenu}
+                            autoFocus={menu}
                             className={styles.input}
                         />
                         <label
@@ -228,11 +228,11 @@ export class ServicePanel extends React.Component<Props, State> {
 
 const ServicePanelRedux = connect(
     state => ({
-        serviceMenu: state.serviceMenu,
+        menu: state.menu,
     }),
     dispatch => ({
-        toggleServiceMenu: (toggle: boolean) => {
-            dispatch(toggleServiceMenu(toggle));
+        toggleMenu: (toggle: boolean) => {
+            dispatch(toggleMenu(toggle));
         },
     })
 )(ServicePanel);

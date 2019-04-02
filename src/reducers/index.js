@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import Cart from './Cart';
-import serviceMenu from './serviceMenu';
+import Menu from './Menu';
 
 const rootReducer = combineReducers({
     cart: Cart,
-    serviceMenu: serviceMenu,
+    menu: Menu,
 });
 
 const reducer = persistReducer(

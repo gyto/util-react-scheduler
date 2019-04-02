@@ -1,6 +1,6 @@
 // @flow
 
-import { TOGGLE_SERVICE_MENU } from '../actions/toggleServiceMenu';
+import { TOGGLE_MENU } from '../actions/toggleMenu';
 
 const State = false;
 
@@ -9,7 +9,7 @@ export default (
     action
 ) => {
     switch (action.type) {
-        case TOGGLE_SERVICE_MENU:
+        case TOGGLE_MENU:
             return !state;
         default:
             return state;

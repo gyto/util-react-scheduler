@@ -3,14 +3,14 @@ import * as React from 'react';
 import Service from './Services/Service';
 import ServicePanel from './Services/ServicePanel';
 import { connect } from 'react-redux';
-import { toggleServiceMenu } from '../../actions/toggleServiceMenu';
+import { toggleMenu } from '../../actions/toggleMenu';
 import Header from './containers/Header';
 import layoutStyles from './scss/layout.module.scss';
 import buttonStyles from './scss/button.module.scss';
 
 type Props = {
-    toggleServiceMenu: (boolean) => void,
-    serviceMenu: ?boolean,
+    toggleMenu: (boolean) => void,
+    menu: ?boolean,
 }
 
 type State = {
@@ -27,7 +27,7 @@ export class Services extends React.Component<Props, State> {
     }
 
     manageService = (id: string) => {
-        this.props.toggleServiceMenu(true);
+        this.props.toggleMenu(true);
         this.setState({ serviceId: id });
     };
 
@@ -38,18 +38,14 @@ export class Services extends React.Component<Props, State> {
             <div id='outer-container'>
                 <Header title={'Services'} />
                 <div className={layoutStyles.container}>
-                    <ServicePanel
-                        serviceId={serviceId}
-                    />
+                    <ServicePanel serviceId={serviceId}/>
                     <div id="page-wrap">
-                        <Service
-                            callbackId={this.manageService}
-                        />
+                        <Service callbackId={this.manageService}/>
                     </div>
                     <button
                         className={buttonStyles.addButton}
                         onClick={() => {
-                            this.props.toggleServiceMenu(true);
+                            this.props.toggleMenu(true);
                             this.setState({ serviceId: null });
                         }}
                     >Add</button>
@@ -61,11 +57,11 @@ export class Services extends React.Component<Props, State> {
 
 const ServicesRedux = connect(
     state => ({
-        serviceMenu: state.serviceMenu,
+        menu: state.menu,
     }),
     dispatch => ({
-        toggleServiceMenu: (toggle: boolean) => {
-            dispatch(toggleServiceMenu(toggle));
+        toggleMenu: (toggle: boolean) => {
+            dispatch(toggleMenu(toggle));
         },
     })
 )(Services);
