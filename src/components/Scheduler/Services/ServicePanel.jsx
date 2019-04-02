@@ -4,12 +4,14 @@ import FirebaseRealDB, { DATABASE_REF } from '../../../utils/FirebaseRealDB';
 import moment from 'moment';
 import styles from './ServicePanel.module.scss';
 import MenuContainer from '../containers/MenuContainer';
+import { connect } from 'react-redux';
+import { toggleServiceMenu } from '../../../actions/toggleServiceMenu';
 
 
 type Props = {
-    openPanel: boolean,
-    onStateChange: () => void,
     serviceId?: ?string,
+    toggleServiceMenu: (boolean) => void,
+    serviceMenu: boolean,
 }
 
 type State = {
@@ -17,9 +19,16 @@ type State = {
     duration: ?number,
     price: ?number,
     desc: ?string,
+    timeModified: ?Date,
+    submitType: string,
 }
 
-class ServicePanel extends React.Component<Props, State> {
+const SUBMIT_TYPE = {
+    save: 'save',
+    edit: 'edit',
+};
+
+export class ServicePanel extends React.Component<Props, State> {
     fdb: FirebaseRealDB;
 
     constructor(props: Props) {
@@ -30,39 +39,62 @@ class ServicePanel extends React.Component<Props, State> {
             duration: 0,
             price: 0,
             desc: '',
+            open: false,
+            timeModified: null,
+            submitType: SUBMIT_TYPE.save,
         };
 
         this.fdb = new FirebaseRealDB();
     }
 
     componentDidUpdate(prevProps: Props) {
-        if (this.props.serviceId && this.props.serviceId !== prevProps.serviceId) {
-            this.fetchData(this.props.serviceId);
+        if (this.props.serviceId !== prevProps.serviceId) {
+            if (this.props.serviceId) this.fetchData(this.props.serviceId);
         }
     }
 
     fetchData = (id: string) => {
         this.fdb.readSingleInstance(DATABASE_REF.services, id)
-            .then(snapshot => console.log(snapshot.val()));
+            .then(snapshot => {
+                let item = snapshot.val();
+                this.setState({
+                    name: item.name,
+                    duration: item.duration,
+                    price: item.price,
+                    desc: item.desc,
+                    timeModified: item.timeModified,
+                    submitType: SUBMIT_TYPE.edit,
+                });
+            });
     };
 
-    handleSubmit = (e: SyntheticEvent<HTMLButtonElement>): void => {
+    handleSubmit = (e: SyntheticEvent<HTMLButtonElement>, submitOption: string): void => {
         e.preventDefault();
         const { name, duration, price, desc } = this.state;
-        const item = {
+        let item = {
             name: name,
             duration: duration,
             price: price,
             desc: desc,
-            timeCreated: moment().format(),
             timeModified: moment().format(),
         };
-        this.fdb.createInstance(DATABASE_REF.services, item);
+
+        if (submitOption === SUBMIT_TYPE.save) {
+            item = { ...item, timeCreated: moment().format() };
+            this.fdb.createInstance(DATABASE_REF.services, item);
+        }
+
+        if ( submitOption === SUBMIT_TYPE.edit && this.props.serviceId) {
+            this.fdb.updateInstance(DATABASE_REF.services, this.props.serviceId, item);
+        }
+
+        this.props.toggleServiceMenu(false);
         this.setState({
             name: '',
             duration: 0,
             price: 0,
             desc: '',
+            submitType: SUBMIT_TYPE.save,
         });
     };
 
@@ -76,23 +108,50 @@ class ServicePanel extends React.Component<Props, State> {
         }
     };
 
+    handleDelete = () => {
+        if (this.props.serviceId) {
+            this.fdb.deleteInstance(DATABASE_REF.services, this.props.serviceId);
+            this.props.toggleServiceMenu(false);
+            this.setState({ submitType: SUBMIT_TYPE.save });
+        }
+    };
+
+    handleStateChange = (state: {isOpen: boolean}) => {
+        if (this.props.serviceMenu && !state.isOpen) {
+            this.props.toggleServiceMenu(false);
+            this.setState({
+                name: '',
+                duration: 0,
+                price: 0,
+                desc: '',
+                submitType: SUBMIT_TYPE.save,
+            });
+        }
+    };
+
     render() {
         const {
             name,
             duration,
             price,
             desc,
+            timeModified,
+            submitType,
         } = this.state;
 
-        const { openPanel, onStateChange } = this.props;
+        const {
+            serviceMenu,
+            serviceId,
+        } = this.props;
 
         return <>
             <MenuContainer
-                open={openPanel}
-                onStateChange={onStateChange}
+                open={serviceMenu}
+                onStateChange={this.handleStateChange}
             >
                 <div className={styles.menu}>
-                    <form onSubmit={this.handleSubmit}>
+                    <h2>{serviceId ? 'Edit Service' : 'Create Service'}</h2>
+                    <form onSubmit={event => this.handleSubmit(event, submitType)}>
                         <label
                             htmlFor="nameInput"
                             className={styles.label}
@@ -104,7 +163,7 @@ class ServicePanel extends React.Component<Props, State> {
                             onChange={this.handleInputChange}
                             value={name}
                             required
-                            autoFocus={openPanel}
+                            autoFocus={serviceMenu}
                             className={styles.input}
                         />
                         <label
@@ -146,7 +205,20 @@ class ServicePanel extends React.Component<Props, State> {
                             value={desc}
                             className={styles.textArea}
                         />
-                        <button className={styles.save}>Submit</button>
+                        <div className={styles.buttons}>
+                            <button
+                                className={styles.save}
+                                type='submit'
+                            >Submit</button>
+                            {!serviceId ? '' : <span
+                                className={styles.delete}
+                                onClick={this.handleDelete}
+                                role='button'
+                            >Delete</span>}
+                        </div>
+                        {!serviceId ? '' : <p><small
+                            className={styles.lastMod}
+                        >Modified: {moment(timeModified).calendar()}</small></p>}
                     </form>
                 </div>
             </MenuContainer>
@@ -154,4 +226,15 @@ class ServicePanel extends React.Component<Props, State> {
     }
 }
 
-export default ServicePanel;
+const ServicePanelRedux = connect(
+    state => ({
+        serviceMenu: state.serviceMenu,
+    }),
+    dispatch => ({
+        toggleServiceMenu: (toggle: boolean) => {
+            dispatch(toggleServiceMenu(toggle));
+        },
+    })
+)(ServicePanel);
+
+export default ServicePanelRedux;

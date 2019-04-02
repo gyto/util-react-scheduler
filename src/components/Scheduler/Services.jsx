@@ -2,48 +2,43 @@
 import * as React from 'react';
 import Service from './Services/Service';
 import ServicePanel from './Services/ServicePanel';
-import styles from './Services.module.scss';
+import { connect } from 'react-redux';
+import { toggleServiceMenu } from '../../actions/toggleServiceMenu';
+import Header from './containers/Header';
+import layoutStyles from './scss/layout.module.scss';
+import buttonStyles from './scss/button.module.scss';
 
-type Props = {}
+type Props = {
+    toggleServiceMenu: (boolean) => void,
+    serviceMenu: ?boolean,
+}
 
 type State = {
-    openPanel: boolean,
     serviceId: ?string,
 }
 
-type onStateChange = {
-    isOpen: boolean
-}
-
-class Services extends React.Component<Props, State> {
+export class Services extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
         this.state = {
-            openPanel: false,
             serviceId: null,
         };
     }
 
-    onStateChange = (state: onStateChange) => {
-        this.setState({ openPanel: state.isOpen });
-    };
-
     manageService = (id: string) => {
-        this.setState({
-            openPanel: true,
-            serviceId: id,
-        });
+        this.props.toggleServiceMenu(true);
+        this.setState({ serviceId: id });
     };
 
     render() {
-        const { openPanel, serviceId} = this.state;
+        const { serviceId} = this.state;
+
         return (
             <div id='outer-container'>
-                <div className={styles.container}>
+                <Header title={'Services'} />
+                <div className={layoutStyles.container}>
                     <ServicePanel
-                        openPanel={openPanel}
-                        onStateChange={this.onStateChange}
                         serviceId={serviceId}
                     />
                     <div id="page-wrap">
@@ -52,8 +47,11 @@ class Services extends React.Component<Props, State> {
                         />
                     </div>
                     <button
-                        className={styles.addButton}
-                        onClick={() => this.setState({ openPanel: true })}
+                        className={buttonStyles.addButton}
+                        onClick={() => {
+                            this.props.toggleServiceMenu(true);
+                            this.setState({ serviceId: null });
+                        }}
                     >Add</button>
                 </div>
             </div>
@@ -61,4 +59,15 @@ class Services extends React.Component<Props, State> {
     }
 }
 
-export default Services;
+const ServicesRedux = connect(
+    state => ({
+        serviceMenu: state.serviceMenu,
+    }),
+    dispatch => ({
+        toggleServiceMenu: (toggle: boolean) => {
+            dispatch(toggleServiceMenu(toggle));
+        },
+    })
+)(Services);
+
+export default ServicesRedux;
