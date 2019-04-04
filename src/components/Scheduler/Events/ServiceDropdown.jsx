@@ -7,6 +7,7 @@ import formInputStyles from '../containers/FormInput.module.scss';
 import { setSelectedServices } from '../../../actions/setSelectedServices';
 import type { ServicedService } from '../../../components/Scheduler/types/Services';
 import eventPanelStyles from './EventPanel.module.scss';
+import { ReactSelectStyles } from '../containers/ReactSelectStyles';
 
 type LabelValueObject = Object & {
     value: string,
@@ -76,6 +77,7 @@ export class ServiceDropdown extends React.Component<Props, State> {
         const checkSelectedServices = selectedServices === undefined
             || selectedServices.length === 0;
 
+        // TODO: remove this nonsense
         let sumTime: Array<number> = [];
         let sumTotal: Array<number> = [];
         let viewTime: number;
@@ -101,13 +103,14 @@ export class ServiceDropdown extends React.Component<Props, State> {
                     isSearchable
                     onChange={this.handleChange}
                     options={this.state.options}
+                    styles={ReactSelectStyles}
                 />
                 {checkSelectedServices ? '' : <p
                     className={eventPanelStyles.lastMod}
                 >
                     <small>Time: {viewTime}min</small>
                     <br/>
-                    <small>Appx Total: ${viewTotal}</small>
+                    <small>Appx. Total: ${viewTotal}</small>
                 </p>}
             </>
         );

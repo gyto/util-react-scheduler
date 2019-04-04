@@ -37,6 +37,8 @@ export class EventPanel extends React.Component<Props, State> {
 
         this.state = {
             name: '',
+            time: moment().format('HH:mm'),
+            date: moment().format('YYYY-MM-DD'),
             startIn: null,
             endsIn: null,
             serviceIds: [],
@@ -76,7 +78,13 @@ export class EventPanel extends React.Component<Props, State> {
     handleSubmit = (e: SyntheticEvent<HTMLButtonElement>, submitOption: string): void => {
         e.preventDefault();
 
-        const { name } = this.state;
+        const { name, time, date } = this.state;
+        const { selectedServices } = this.props;
+
+        if (selectedServices) {
+
+        }
+
         let item = {
             name: name,
             serviceIds: this.props.selectedServices,
@@ -140,6 +148,8 @@ export class EventPanel extends React.Component<Props, State> {
     render() {
         const {
             name,
+            time,
+            date,
             startIn,
             endsIn,
             serviceIds,
@@ -170,6 +180,30 @@ export class EventPanel extends React.Component<Props, State> {
                         />
 
                         <ServiceDropdown />
+
+                        <FormInput
+                            labelName='date'
+                            onChange={this.handleInputChange}
+                            inputValue={date}
+                            inputType='date'
+                            required
+                            inputProps={{
+                                min: '8:00',
+                                max: '21:00',
+                            }}
+                        />
+
+                        <FormInput
+                            labelName='time'
+                            onChange={this.handleInputChange}
+                            inputValue={time}
+                            inputType='time'
+                            required
+                            inputProps={{
+                                min: '8:00',
+                                max: '21:00',
+                            }}
+                        />
 
                         <div className={styles.buttons}>
                             <button
