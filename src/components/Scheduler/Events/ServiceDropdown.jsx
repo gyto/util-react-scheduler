@@ -1,9 +1,12 @@
 // @flow
 import * as React from 'react';
 import Select from 'react-select';
-import FirebaseRealDB, { DATABASE_REF } from "../../../utils/FirebaseRealDB";
+import FirebaseRealDB, { DATABASE_REF } from '../../../utils/FirebaseRealDB';
 import { connect } from 'react-redux';
-import styles from "../containers/FormInput.module.scss";
+import formInputStyles from '../containers/FormInput.module.scss';
+import { setSelectedServices } from '../../../actions/setSelectedServices';
+import type { ServicedService } from '../../../components/Scheduler/types/Services';
+import eventPanelStyles from './EventPanel.module.scss';
 
 type LabelValueObject = Object & {
     value: string,
@@ -12,6 +15,8 @@ type LabelValueObject = Object & {
 
 type Props = {
     menu: boolean,
+    setSelectedServices: (selectedServices: ServicedService[]) => void,
+    selectedServices: ServicedService[]
 }
 
 type State = {
@@ -41,7 +46,9 @@ export class ServiceDropdown extends React.Component<Props, State> {
                         if (items.hasOwnProperty(item)) {
                             options.push({
                                 value: item,
-                                label: items[item].name,
+                                label: `${items[item].name} - ${items[item].duration}min`,
+                                duration: items[item].duration,
+                                price: items[item].price,
                             });
                         }
                     }
@@ -50,15 +57,44 @@ export class ServiceDropdown extends React.Component<Props, State> {
         }
     }
 
-    handleChange = (e) => {
-        console.log(e);
+    handleSum = (a: number, b: number) => {
+        return a + b;
+    };
+
+    handleChange = (selectedOptions: LabelValueObject[]) => {
+        let selectedId = [];
+        selectedOptions.map(item => selectedId.push({
+            id: item.value,
+            duration: item.duration,
+            price: item.price,
+        }));
+        this.props.setSelectedServices(selectedId);
     };
 
     render() {
+        const { selectedServices } = this.props;
+        const checkSelectedServices = selectedServices === undefined
+            || selectedServices.length === 0;
+
+        let sumTime: Array<number> = [];
+        let sumTotal: Array<number> = [];
+        let viewTime: number;
+        let viewTotal: number;
+
+        if (!checkSelectedServices) {
+            selectedServices && selectedServices.map(item => {
+                sumTime.push(Number(item.duration));
+                sumTotal.push(Number(item.price));
+            });
+
+            viewTime = sumTime.reduce(this.handleSum);
+            viewTotal = sumTotal.reduce(this.handleSum);
+        }
+
         return (
             <>
                 <label
-                    className={styles.label}
+                    className={formInputStyles.label}
                 >Services</label>
                 <Select
                     isMulti
@@ -66,6 +102,13 @@ export class ServiceDropdown extends React.Component<Props, State> {
                     onChange={this.handleChange}
                     options={this.state.options}
                 />
+                {checkSelectedServices ? '' : <p
+                    className={eventPanelStyles.lastMod}
+                >
+                    <small>Time: {viewTime}min</small>
+                    <br/>
+                    <small>Appx Total: ${viewTotal}</small>
+                </p>}
             </>
         );
     }
@@ -74,6 +117,12 @@ export class ServiceDropdown extends React.Component<Props, State> {
 const ServiceDropdownRedux = connect(
     state => ({
         menu: state.menu,
+        selectedServices: state.selectedServices,
+    }),
+    dispatch => ({
+        setSelectedServices: (selectedServices: ServicedService[]) => {
+            dispatch(setSelectedServices(selectedServices));
+        },
     })
 )(ServiceDropdown);
 

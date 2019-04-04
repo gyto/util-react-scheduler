@@ -7,7 +7,7 @@ import MenuContainer from '../containers/MenuContainer';
 import { connect } from 'react-redux';
 import { toggleMenu } from '../../../actions/toggleMenu';
 import type { Events } from '../types/Events';
-import type { Services } from "../types/Services";
+import type { ServicedService, Services } from "../types/Services";
 import FormInput from "../containers/FormInput";
 import ServiceDropdown from "./ServiceDropdown";
 
@@ -16,6 +16,7 @@ type Props = {
     serviceId?: ?string,
     toggleMenu: (boolean) => void,
     menu: boolean,
+    selectedServices: ServicedService[]
 }
 
 type State = {
@@ -74,21 +75,22 @@ export class EventPanel extends React.Component<Props, State> {
 
     handleSubmit = (e: SyntheticEvent<HTMLButtonElement>, submitOption: string): void => {
         e.preventDefault();
+
+        const { name } = this.state;
+        let item = {
+            name: name,
+            serviceIds: this.props.selectedServices,
+            timeModified: moment().format(),
+        };
+
+        console.log(item);
+
         return;
 
-        // const { name, duration, price, desc } = this.state;
-        // let item = {
-        //     name: name,
-        //     duration: duration,
-        //     price: price,
-        //     desc: desc,
-        //     timeModified: moment().format(),
-        // };
-        //
-        // if (submitOption === SUBMIT_TYPE.save) {
-        //     item = { ...item, timeCreated: moment().format() };
-        //     this.fdb.createInstance(DATABASE_REF.events, item);
-        // }
+        if (submitOption === SUBMIT_TYPE.save) {
+            item = { ...item, timeCreated: moment().format() };
+            this.fdb.createInstance(DATABASE_REF.events, item);
+        }
         //
         // if ( submitOption === SUBMIT_TYPE.edit && this.props.serviceId) {
         //     this.fdb.updateInstance(DATABASE_REF.events, this.props.serviceId, item);
@@ -193,6 +195,7 @@ export class EventPanel extends React.Component<Props, State> {
 const EventPanelRedux = connect(
     state => ({
         menu: state.menu,
+        selectedServices: state.selectedServices,
     }),
     dispatch => ({
         toggleMenu: (toggle: boolean) => {

@@ -9,3 +9,9 @@ export type Services = Object & {
     timeCreated?: Date,
     timeModified?: Date,
 }
+
+
+export type ServicedService = Object & {
+    id: string,
+    [string]: string,
+}
