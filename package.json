@@ -32,7 +32,7 @@
     "react-sortable-tree": "^2.6.0",
     "redux": "^4.0.1",
     "redux-persist": "^5.10.0",
-    "yarn": "^1.13.0"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-flow-strip-types": "^7.0.0",
