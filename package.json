@@ -14,7 +14,7 @@
     "localforage": "^1.7.3",
     "lodash.camelcase": "^4.3.0",
     "moment": "^2.24.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "react": "^16.7.0",
     "react-autosuggest": "^9.4.3",
     "react-burger-menu": "^2.6.8",
