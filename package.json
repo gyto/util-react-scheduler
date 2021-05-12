@@ -6,7 +6,7 @@
     "@opuscapita/react-grid": "^7.3.14",
     "algoliasearch": "^3.32.0",
     "axios": "^0.18.1",
-    "chart.js": "^2.7.3",
+    "chart.js": "^2.9.4",
     "faker": "^4.1.0",
     "flow-bin": "^0.85.0",
     "i18next": "^15.0.7",
